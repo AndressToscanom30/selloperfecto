@@ -1114,7 +1114,7 @@ function CTAFinal({ isMobile }) {
                             backgroundClip: 'text',
                         }}
                     >
-                        El primer paso es gratis
+                        El primer paso es en grande
                     </h2>
 
                     <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", fontSize: '18px', marginBottom: '48px' }}>
@@ -1143,7 +1143,7 @@ function CTAFinal({ isMobile }) {
                             onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
                             onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
                         >
-                            Agendar asesoría gratuita
+                            Agendar asesoría
                         </button>
                         <button
                             style={{
