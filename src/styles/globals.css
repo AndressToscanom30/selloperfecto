@@ -1,0 +1,227 @@
+/* ===============================================
+   IMPORTACIÓN DE FUENTES
+   =============================================== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inria+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ===============================================
+   RESET Y ESTILOS BASE
+   =============================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inria Serif', serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+/* ===============================================
+   TYPOGRAPHY
+   =============================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.8;
+}
+
+/* ===============================================
+   LINKS
+   =============================================== */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f4d289;
+}
+
+/* ===============================================
+   BUTTONS
+   =============================================== */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ===============================================
+   UTILIDADES PERSONALIZADAS
+   =============================================== */
+
+/* Gradiente dorado para títulos */
+.gradient-gold {
+  background: linear-gradient(
+    90deg,
+    #7a5a1a 0%,
+    #c9a24d 20%,
+    #f5e6a8 40%,
+    #ffd86b 50%,
+    #f5e6a8 60%,
+    #c9a24d 80%,
+    #7a5a1a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Efecto brillo sutil */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(244, 210, 137, 0.3);
+}
+
+.glow-gold-lg {
+  box-shadow: 0 0 30px rgba(244, 210, 137, 0.5);
+}
+
+/* Separador decorativo */
+.separator {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #f4d289,
+    transparent
+  );
+}
+
+/* Efecto hover sutil */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ===============================================
+   SCROLLBAR PERSONALIZADA
+   =============================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f4d289;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e0b567;
+}
+
+/* ===============================================
+   RESPONSIVE
+   =============================================== */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ===============================================
+   ANIMACIONES
+   =============================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+/* ===============================================
+   ACCESIBILIDAD
+   =============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
