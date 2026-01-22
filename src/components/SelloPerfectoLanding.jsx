@@ -726,11 +726,12 @@ function HowItWorks({ isMobile, isTablet }) {
     ];
 
     return (
-        <section id="proceso" ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.navy }}>
+        <section id="proceso" ref={ref} style={{ padding: '120px 24px', backgroundColor: COLORS.navy }}>
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    maxWidth: '81%',
+                    margin: '0 auto',
                 }}
             >
                 <motion.div
@@ -780,7 +781,8 @@ function HowItWorks({ isMobile, isTablet }) {
                                 left: 0,
                                 right: 0,
                                 height: '4px',
-                                background: `linear-gradient(to right, ${COLORS.gold}, ${COLORS.gold}80, ${COLORS.gold}33)`,
+                                borderRadius: '10px',
+                                background: `${COLORS.gold}`,
                                 zIndex: 0,
                             }}
                         />
@@ -823,7 +825,7 @@ function HowItWorks({ isMobile, isTablet }) {
                             <div
                                 style={{
                                     backgroundColor: `${COLORS.gold}19`,
-                                    borderRadius: '12px',
+                                    borderRadius: '6px',
                                     padding: '24px',
                                     border: `1px solid ${COLORS.gold}4d`,
                                     height: '100%',
