@@ -105,8 +105,8 @@ export function TeamsSection() {
         },
         {
             id: 7,
-            name: 'Yhosep Briceño',
-            role: 'Community Manager',
+            name: 'Yhoseph Bonilla',
+            role: 'Co-Fundador & Director de Finanzas',
             description: 'Con un enfoque humano y auténtico, gestiona comunidades digitales que aman y defienden las marcas. Su habilidad para contar historias y su empatía son clave en su estrategia.',
             image: YhosepB,
             social: {
