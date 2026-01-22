@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { useRef } from 'react';
 import LogoSP from '../assets/LogoSP.png';
+import TeamsSection from './TeamSection';
 
 // ============================================
 // COLORES Y VARIABLES
@@ -48,6 +49,7 @@ export default function SelloPerfectoLanding() {
             <Services isMobile={isMobile} />
             <HowItWorks isMobile={isMobile} isTablet={isTablet} />
             <Benefits isMobile={isMobile} />
+            <TeamsSection />
             <FAQ isMobile={isMobile} />
             <CTAFinal isMobile={isMobile} />
             <Footer isMobile={isMobile} />
