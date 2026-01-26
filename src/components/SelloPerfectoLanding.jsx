@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import { FaInstagram } from "react-icons/fa";
 import { useRef } from 'react';
 import LogoSP from '../assets/LogoSP.png';
+import { VideoSplash } from './VideoSplash';
 import TeamsSection from './TeamSection';
+import { PartnersSection } from './PartnersSection';
+import VideoIntro from '../assets/Intro.mp4';
 
 // ============================================
 // COLORES Y VARIABLES
@@ -28,6 +32,7 @@ export default function SelloPerfectoLanding() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
+    const [videoFinished, setVideoFinished] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -41,19 +46,32 @@ export default function SelloPerfectoLanding() {
     }, []);
 
     return (
-        <div style={{ background: 'white' }}>
-            <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isMobile={isMobile} />
-            <Hero isMobile={isMobile} isTablet={isTablet} />
-            <ValueProposition isMobile={isMobile} />
-            <Problem isMobile={isMobile} />
-            <Services isMobile={isMobile} />
-            <HowItWorks isMobile={isMobile} isTablet={isTablet} />
-            <Benefits isMobile={isMobile} />
-            <TeamsSection />
-            <FAQ isMobile={isMobile} />
-            <CTAFinal isMobile={isMobile} />
-            <Footer isMobile={isMobile} />
-        </div>
+        <>
+            {/* VIDEO SPLASH SCREEN */}
+            {!videoFinished && (
+                <VideoSplash
+                    videoUrl={VideoIntro}
+                    duration={47}
+                    onFinish={() => setVideoFinished(true)}
+                />
+            )}
+
+            {/* CONTENIDO PRINCIPAL */}
+            <div style={{ background: 'white' }}>
+                <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isMobile={isMobile} />
+                <Hero isMobile={isMobile} isTablet={isTablet} />
+                <ValueProposition isMobile={isMobile} />
+                <Problem isMobile={isMobile} />
+                <Services isMobile={isMobile} />
+                <HowItWorks isMobile={isMobile} isTablet={isTablet} />
+                <Benefits isMobile={isMobile} />
+                <TeamsSection />
+                <PartnersSection isMobile={isMobile} />
+                <FAQ isMobile={isMobile} />
+                <CTAFinal isMobile={isMobile} />
+                <Footer isMobile={isMobile} />
+            </div>
+        </>
     );
 }
 
@@ -77,16 +95,16 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen, isMobile }) {
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    padding: isMobile ? '0 16px' : '0 24px',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    height: '64px',
+                    height: isMobile ? '56px' : '64px',
                 }}
             >
                 {/* Logo */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <img src={LogoSP} alt="LOGO de Sello Perfecto" style={{ width: '50px', height: 'auto' }} />
+                    <img src={LogoSP} alt="LOGO de Sello Perfecto" style={{ width: isMobile ? '40px' : '50px', height: 'auto' }} />
                 </div>
 
                 {/* Desktop Menu */}
@@ -108,10 +126,10 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen, isMobile }) {
                             border: 'none',
                             color: COLORS.gold,
                             cursor: 'pointer',
-                            fontSize: '24px',
+                            fontSize: isMobile ? '20px' : '24px',
                         }}
                     >
-                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 )}
             </div>
@@ -124,8 +142,8 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen, isMobile }) {
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '16px',
-                        padding: '16px 24px',
+                        gap: '12px',
+                        padding: '12px 16px',
                         borderTop: `1px solid ${COLORS.gold}33`,
                     }}
                 >
@@ -148,6 +166,7 @@ function NavLink({ href, children }) {
                 textDecoration: 'none',
                 fontFamily: "'Inria Serif', serif",
                 transition: 'color 0.3s ease',
+                fontSize: '16px',
             }}
             onMouseEnter={(e) => (e.target.style.color = COLORS.goldAccent)}
             onMouseLeave={(e) => (e.target.style.color = COLORS.gold)}
@@ -165,15 +184,15 @@ function Hero({ isMobile, isTablet }) {
     return (
         <section
             style={{
-                paddingTop: '120px',
-                paddingBottom: '80px',
-                paddingLeft: '24px',
-                paddingRight: '24px',
+                paddingTop: isMobile ? '80px' : '120px',
+                paddingBottom: isMobile ? '60px' : '80px',
+                paddingLeft: isMobile ? '16px' : '24px',
+                paddingRight: isMobile ? '16px' : '24px',
                 background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navy} 100%)`,
                 color: COLORS.white,
                 position: 'relative',
                 overflow: 'hidden',
-                minHeight: isMobile ? '80vh' : '100vh',
+                minHeight: isMobile ? '70vh' : '100vh',
                 display: 'flex',
                 alignItems: 'center',
             }}
@@ -182,10 +201,10 @@ function Hero({ isMobile, isTablet }) {
             <div
                 style={{
                     position: 'absolute',
-                    top: '80px',
-                    right: '40px',
-                    width: '288px',
-                    height: '288px',
+                    top: isMobile ? '20px' : '80px',
+                    right: isMobile ? '-50px' : '40px',
+                    width: isMobile ? '200px' : '288px',
+                    height: isMobile ? '200px' : '288px',
                     backgroundColor: `${COLORS.gold}0d`,
                     borderRadius: '50%',
                     filter: 'blur(80px)',
@@ -216,8 +235,8 @@ function Hero({ isMobile, isTablet }) {
                             style={{
                                 color: COLORS.gold,
                                 fontFamily: "'Inria Serif', serif",
-                                fontSize: isMobile ? '14px' : '18px',
-                                marginBottom: '16px',
+                                fontSize: isMobile ? '12px' : '18px',
+                                marginBottom: isMobile ? '8px' : '16px',
                             }}
                         >
                             Transformación empresarial
@@ -228,9 +247,9 @@ function Hero({ isMobile, isTablet }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
                             style={{
-                                fontSize: isMobile ? '48px' : '72px',
+                                fontSize: isMobile ? '40px' : '72px',
                                 fontFamily: "'Great Vibes', cursive",
-                                marginBottom: '24px',
+                                marginBottom: isMobile ? '16px' : '24px',
                                 background: 'linear-gradient(90deg, #7a5a1a 0%, #c9a24d 20%, #f5e6a8 40%, #ffd86b 50%, #f5e6a8 60%, #c9a24d 80%, #7a5a1a 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
@@ -245,10 +264,10 @@ function Hero({ isMobile, isTablet }) {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.6 }}
                             style={{
-                                fontSize: isMobile ? '24px' : '32px',
+                                fontSize: isMobile ? '20px' : '32px',
                                 fontFamily: "'Inria Serif', serif",
-                                marginBottom: '24px',
-                                lineHeight: '1.4',
+                                marginBottom: isMobile ? '16px' : '24px',
+                                lineHeight: '1.3',
                             }}
                         >
                             Tu equipo merece ser excepcional.{' '}
@@ -262,9 +281,9 @@ function Hero({ isMobile, isTablet }) {
                             style={{
                                 color: '#ccc',
                                 fontFamily: "'Inria Serif', serif",
-                                fontSize: isMobile ? '14px' : '18px',
-                                marginBottom: '32px',
-                                lineHeight: '1.8',
+                                fontSize: isMobile ? '13px' : '18px',
+                                marginBottom: isMobile ? '24px' : '32px',
+                                lineHeight: '1.6',
                             }}
                         >
                             Evaluamos, asesoramos y capacitamos a tu personal para garantizar una atención al cliente ética, profesional y verdaderamente humana en cada interacción.
@@ -276,22 +295,23 @@ function Hero({ isMobile, isTablet }) {
                             transition={{ delay: 1 }}
                             style={{
                                 display: 'flex',
-                                gap: '16px',
+                                gap: isMobile ? '12px' : '16px',
                                 flexWrap: 'wrap',
                             }}
                         >
                             <button
                                 style={{
-                                    padding: '16px 32px',
+                                    padding: isMobile ? '12px 20px' : '16px 32px',
                                     backgroundColor: COLORS.gold,
                                     color: COLORS.navy,
                                     border: 'none',
                                     borderRadius: '8px',
                                     fontFamily: "'Inria Serif', serif",
                                     fontWeight: 'bold',
-                                    fontSize: '16px',
+                                    fontSize: isMobile ? '13px' : '16px',
                                     cursor: 'pointer',
                                     transition: 'all 0.3s ease',
+                                    whiteSpace: 'nowrap',
                                 }}
                                 onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
                                 onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
@@ -300,16 +320,17 @@ function Hero({ isMobile, isTablet }) {
                             </button>
                             <button
                                 style={{
-                                    padding: '16px 32px',
+                                    padding: isMobile ? '12px 20px' : '16px 32px',
                                     backgroundColor: 'transparent',
                                     color: COLORS.gold,
                                     border: `2px solid ${COLORS.gold}`,
                                     borderRadius: '8px',
                                     fontFamily: "'Inria Serif', serif",
                                     fontWeight: 'bold',
-                                    fontSize: '16px',
+                                    fontSize: isMobile ? '13px' : '16px',
                                     cursor: 'pointer',
                                     transition: 'all 0.3s ease',
+                                    whiteSpace: 'nowrap',
                                 }}
                                 onMouseEnter={(e) => (e.target.style.backgroundColor = `${COLORS.gold}10`)}
                                 onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
@@ -369,6 +390,7 @@ function Hero({ isMobile, isTablet }) {
                                     </div>
                                 </div>
                             </div>
+
                         </motion.div>
                     )}
                 </div>
@@ -380,14 +402,14 @@ function Hero({ isMobile, isTablet }) {
                     transition={{ delay: 1.2 }}
                     style={{
                         textAlign: 'center',
-                        marginTop: '80px',
+                        marginTop: isMobile ? '40px' : '80px',
                     }}
                 >
-                    <p style={{ color: `${COLORS.gold}b3`, fontFamily: "'Inria Serif', serif", fontSize: '14px', marginBottom: '16px' }}>
+                    <p style={{ color: `${COLORS.gold}b3`, fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : '14px', marginBottom: isMobile ? '12px' : '16px' }}>
                         Descubre cómo elevar tu atención al cliente
                     </p>
                     <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-                        <ChevronDown color={`${COLORS.gold}80`} size={24} style={{ margin: '0 auto' }} />
+                        <ChevronDown color={`${COLORS.gold}80`} size={isMobile ? 30 : 44} style={{ margin: '0 auto' }} />
                     </motion.div>
                 </motion.div>
             </div>
@@ -419,11 +441,12 @@ function ValueProposition({ isMobile }) {
     ];
 
     return (
-        <section ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.white }}>
+        <section ref={ref} style={{ padding: isMobile ? '60px 16px' : '80px 24px', backgroundColor: COLORS.white }}>
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    maxWidth: '1200px',
+                    margin: '0 auto',
                 }}
             >
                 <motion.div
@@ -434,7 +457,7 @@ function ValueProposition({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
                             marginBottom: '16px',
                             textAlign: 'center',
@@ -448,7 +471,7 @@ function ValueProposition({ isMobile }) {
                     </h2>
                     <p
                         style={{
-                            fontSize: isMobile ? '14px' : '20px',
+                            fontSize: isMobile ? '13px' : '20px',
                             color: COLORS.textGray,
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
@@ -463,7 +486,7 @@ function ValueProposition({ isMobile }) {
                     style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: '32px',
+                        gap: isMobile ? '16px' : '32px',
                     }}
                 >
                     {props.map((prop, idx) => (
@@ -473,7 +496,7 @@ function ValueProposition({ isMobile }) {
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ delay: idx * 0.2, duration: 0.6 }}
                             style={{
-                                padding: '32px',
+                                padding: isMobile ? '20px' : '32px',
                                 backgroundColor: `${COLORS.navy}08`,
                                 borderRadius: '12px',
                                 border: `1px solid ${COLORS.gold}33`,
@@ -489,10 +512,10 @@ function ValueProposition({ isMobile }) {
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
-                            <h3 style={{ fontSize: '20px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
+                            <h3 style={{ fontSize: isMobile ? '16px' : '20px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
                                 {prop.title}
                             </h3>
-                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", lineHeight: '1.6' }}>{prop.desc}</p>
+                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", lineHeight: '1.6', fontSize: isMobile ? '13px' : '14px' }}>{prop.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -513,16 +536,25 @@ function Problem({ isMobile }) {
         'Personal sin estándares claros de atención',
         'Comunicación inconsistente que confunde a tus clientes',
         'Pérdida de reputación por falta de profesionalismo',
-        'Rotación alta de personal insatisfecho',
+        'Perder reputación por el mal trato al consumidor final',
         'Clientes que se van porque no se sienten valorados',
+        'Falta de personal capacitado en habilidades blandas/duras'
     ];
 
     return (
-        <section id="problema" ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.navy }}>
+        <section
+            id="problema"
+            ref={ref}
+            style={{
+                padding: 'clamp(60px, 8vw, 100px) clamp(16px, 4vw, 32px)',
+                backgroundColor: COLORS.navy
+            }}
+        >
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    maxWidth: '1200px',
+                    margin: '0 auto'
                 }}
             >
                 <motion.div
@@ -533,22 +565,25 @@ function Problem({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: 'clamp(32px, 6vw, 56px)',
                             fontWeight: '400',
                             marginBottom: '16px',
                             textAlign: 'center',
-                            color: COLORS.gold,
+                            color: COLORS.gold
                         }}
                     >
                         El Problema Real
                     </h2>
+
                     <p
                         style={{
-                            fontSize: isMobile ? '14px' : '20px',
+                            fontSize: 'clamp(13px, 2.5vw, 20px)',
                             color: '#bbb',
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
-                            marginBottom: '40px',
+                            marginBottom: 'clamp(32px, 6vw, 48px)',
+                            maxWidth: '900px',
+                            marginInline: 'auto'
                         }}
                     >
                         Sabemos que tu marca se esfuerza, pero sin los estándares correctos, cada interacción es una oportunidad perdida.
@@ -557,8 +592,8 @@ function Problem({ isMobile }) {
                     <div
                         style={{
                             display: 'grid',
-                            gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                            gap: '24px',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                            gap: 'clamp(12px, 3vw, 24px)'
                         }}
                     >
                         {symptoms.map((symptom, idx) => (
@@ -569,16 +604,34 @@ function Problem({ isMobile }) {
                                 transition={{ delay: idx * 0.1, duration: 0.5 }}
                                 style={{
                                     display: 'flex',
-                                    gap: '16px',
+                                    gap: 'clamp(10px, 2vw, 16px)',
                                     alignItems: 'flex-start',
-                                    padding: '16px',
+                                    padding: 'clamp(12px, 2.5vw, 16px)',
                                     backgroundColor: `${COLORS.gold}19`,
                                     borderRadius: '8px',
-                                    borderLeft: `4px solid ${COLORS.gold}80`,
+                                    borderLeft: `4px solid ${COLORS.gold}80`
                                 }}
                             >
-                                <div style={{ color: `${COLORS.gold}b3`, flexShrink: 0 }}>⚠️</div>
-                                <p style={{ color: COLORS.white, fontFamily: "'Inria Serif', serif" }}>{symptom}</p>
+                                <div
+                                    style={{
+                                        color: `${COLORS.gold}b3`,
+                                        flexShrink: 0,
+                                        fontSize: '16px'
+                                    }}
+                                >
+                                    ⚠️
+                                </div>
+
+                                <p
+                                    style={{
+                                        color: COLORS.white,
+                                        fontFamily: "'Inria Serif', serif",
+                                        fontSize: 'clamp(12px, 2vw, 14px)',
+                                        lineHeight: '1.5'
+                                    }}
+                                >
+                                    {symptom}
+                                </p>
                             </motion.div>
                         ))}
                     </div>
@@ -587,6 +640,7 @@ function Problem({ isMobile }) {
         </section>
     );
 }
+
 
 // ============================================
 // SERVICIOS
@@ -606,11 +660,12 @@ function Services({ isMobile }) {
     ];
 
     return (
-        <section id="servicios" ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.white }}>
+        <section id="servicios" ref={ref} style={{ padding: isMobile ? '60px 16px' : '80px 24px', backgroundColor: COLORS.white }}>
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    maxWidth: '1200px',
+                    margin: '0 auto',
                 }}
             >
                 <motion.div
@@ -621,7 +676,7 @@ function Services({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
                             marginBottom: '16px',
                             textAlign: 'center',
@@ -635,7 +690,7 @@ function Services({ isMobile }) {
                     </h2>
                     <p
                         style={{
-                            fontSize: isMobile ? '14px' : '20px',
+                            fontSize: isMobile ? '13px' : '20px',
                             color: COLORS.textGray,
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
@@ -650,7 +705,7 @@ function Services({ isMobile }) {
                     style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: '32px',
+                        gap: isMobile ? '16px' : '32px',
                     }}
                 >
                     {services.map((service, idx) => (
@@ -660,7 +715,7 @@ function Services({ isMobile }) {
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                             transition={{ delay: idx * 0.1, duration: 0.6 }}
                             style={{
-                                padding: '32px',
+                                padding: isMobile ? '20px' : '32px',
                                 background: `linear-gradient(135deg, ${COLORS.navy}08 0%, ${COLORS.gold}08 100%)`,
                                 borderRadius: '12px',
                                 border: `1px solid ${COLORS.gold}33`,
@@ -676,12 +731,12 @@ function Services({ isMobile }) {
                             }}
                         >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
-                                <div style={{ fontSize: '40px', fontFamily: "'Great Vibes', cursive", color: `${COLORS.gold}` }}>{service.num}</div>
+                                <div style={{ fontSize: isMobile ? '32px' : '40px', fontFamily: "'Great Vibes', cursive", color: `${COLORS.gold}` }}>{service.num}</div>
                             </div>
-                            <h3 style={{ fontSize: '20px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
+                            <h3 style={{ fontSize: isMobile ? '16px' : '20px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
                                 {service.title}
                             </h3>
-                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", lineHeight: '1.6' }}>{service.desc}</p>
+                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", lineHeight: '1.6', fontSize: isMobile ? '12px' : '14px' }}>{service.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -723,14 +778,20 @@ function HowItWorks({ isMobile, isTablet }) {
             desc: 'Soporte continuo para asegurar que los cambios se mantienen y evolucionan.',
             items: ['Asecoría continua', 'Ajustes necesarios', 'Mejora constante'],
         },
+        {
+            phase: 5,
+            title: 'Sello Perfecto',
+            desc: 'Certificación de calidad que acredita ante el público la excelencia de tu atención al cliente.',
+            items: ['Certificación oficial', 'Fortalecimiento de marca', 'Vínculo continuo'],
+        },
     ];
 
     return (
-        <section id="proceso" ref={ref} style={{ padding: '120px 24px', backgroundColor: COLORS.navy }}>
+        <section id="proceso" ref={ref} style={{ padding: isMobile ? '60px 16px' : '120px 24px', backgroundColor: COLORS.navy }}>
             <div
                 style={{
                     width: '100%',
-                    maxWidth: '81%',
+                    maxWidth: '1200px',
                     margin: '0 auto',
                 }}
             >
@@ -742,7 +803,7 @@ function HowItWorks({ isMobile, isTablet }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
                             marginBottom: '16px',
                             textAlign: 'center',
@@ -753,7 +814,7 @@ function HowItWorks({ isMobile, isTablet }) {
                     </h2>
                     <p
                         style={{
-                            fontSize: isMobile ? '14px' : '20px',
+                            fontSize: isMobile ? '13px' : '20px',
                             color: '#bbb',
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
@@ -767,12 +828,16 @@ function HowItWorks({ isMobile, isTablet }) {
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+                        gridTemplateColumns: isMobile
+                            ? '1fr'
+                            : isTablet
+                                ? 'repeat(2, 1fr)'
+                                : 'repeat(5, 1fr)',
                         gap: '16px',
                         position: 'relative',
                     }}
                 >
-                    {/* Línea conectora */}
+                    {/* Línea conectora - Solo en desktop */}
                     {!isMobile && !isTablet && (
                         <div
                             style={{
@@ -803,8 +868,8 @@ function HowItWorks({ isMobile, isTablet }) {
                             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
                                 <div
                                     style={{
-                                        width: '64px',
-                                        height: '64px',
+                                        width: isMobile ? '48px' : '64px',
+                                        height: isMobile ? '48px' : '64px',
                                         backgroundColor: COLORS.gold,
                                         borderRadius: '50%',
                                         display: 'flex',
@@ -812,7 +877,7 @@ function HowItWorks({ isMobile, isTablet }) {
                                         justifyContent: 'center',
                                         color: COLORS.navy,
                                         fontWeight: 'bold',
-                                        fontSize: '24px',
+                                        fontSize: isMobile ? '18px' : '24px',
                                         fontFamily: "'Great Vibes', cursive",
                                         boxShadow: `0 10px 30px ${COLORS.gold}4d`,
                                     }}
@@ -826,15 +891,15 @@ function HowItWorks({ isMobile, isTablet }) {
                                 style={{
                                     backgroundColor: `${COLORS.gold}19`,
                                     borderRadius: '6px',
-                                    padding: '24px',
+                                    padding: isMobile ? '16px' : '24px',
                                     border: `1px solid ${COLORS.gold}4d`,
                                     height: '100%',
                                 }}
                             >
-                                <h3 style={{ fontSize: '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.gold, marginBottom: '12px', textAlign: 'center' }}>
+                                <h3 style={{ fontSize: isMobile ? '14px' : '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.gold, marginBottom: '12px', textAlign: 'center' }}>
                                     {phase.title}
                                 </h3>
-                                <p style={{ color: '#ccc', fontFamily: "'Inria Serif', serif", fontSize: '14px', marginBottom: '16px', textAlign: 'center' }}>
+                                <p style={{ color: '#ccc', fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : '14px', marginBottom: '16px', textAlign: 'center' }}>
                                     {phase.desc}
                                 </p>
                                 <ul style={{ listStyle: 'none' }}>
@@ -846,7 +911,7 @@ function HowItWorks({ isMobile, isTablet }) {
                                                 gap: '8px',
                                                 alignItems: 'center',
                                                 color: '#ccc',
-                                                fontSize: '12px',
+                                                fontSize: isMobile ? '11px' : '12px',
                                                 fontFamily: "'Inria Serif', serif",
                                                 marginBottom: '8px',
                                             }}
@@ -874,20 +939,21 @@ function Benefits({ isMobile }) {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     const benefits = [
-        { icon: '📈', title: 'Mayor Retención de Clientes', desc: 'Experiencias consistentes que generan lealtad' },
-        { icon: '👥', title: 'Equipo Más Comprometido', desc: 'Personal motivado y orgulloso de representar tu marca' },
-        { icon: '⭐', title: 'Reputación Fortalecida', desc: 'Marca reconocida por su profesionalismo y ética' },
-        { icon: '📊', title: 'Métricas Claras', desc: 'Estándares medibles de calidad en atención' },
-        { icon: '🔄', title: 'Procesos Sostenibles', desc: 'Sistemas que funcionan sin depender de personas clave' },
-        { icon: '💡', title: 'Diferenciación Real', desc: 'Tu marca destaca por la calidad humana de su atención' },
+        { icon: '📈', title: 'Clientes más satisfechos', desc: 'Verás cómo tus clientes regresarán y recomendarán tu negocio por una experiencia consistentemente excelente' },
+        { icon: '👥', title: 'Equipo Más Comprometido', desc: 'Tu personal estará motivado y se sentirá orgulloso de representar tu marca' },
+        { icon: '⭐', title: 'Reputación Fortalecida', desc: 'Tu marca será reconocida en el mercado por su profesionalismo y ética en cada interacción' },
+        { icon: '📊', title: 'Métricas Claras', desc: 'Tendrás estándares medibles que te permitirán monitorear la calidad de atención en tiempo real' },
+        { icon: '🔄', title: 'Personal mejor capacitado', desc: 'Tu equipo dominará las herramientas y técnicas necesarias para brindar un servicio de excelencia' },
+        { icon: '💡', title: 'Diferenciación Real', desc: 'Tu marca se destacará en el mercado por la calidad humana y genuina de su atención' },
     ];
 
     return (
-        <section ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.white }}>
+        <section ref={ref} style={{ padding: isMobile ? '60px 16px' : '80px 24px', backgroundColor: COLORS.white }}>
             <div
                 style={{
                     width: '100%',
-                    padding: '0 24px',
+                    maxWidth: '1200px',
+                    margin: '0 auto',
                 }}
             >
                 <motion.div
@@ -898,7 +964,7 @@ function Benefits({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
                             marginBottom: '16px',
                             textAlign: 'center',
@@ -912,7 +978,7 @@ function Benefits({ isMobile }) {
                     </h2>
                     <p
                         style={{
-                            fontSize: isMobile ? '14px' : '20px',
+                            fontSize: isMobile ? '13px' : '20px',
                             color: COLORS.textGray,
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
@@ -927,7 +993,7 @@ function Benefits({ isMobile }) {
                     style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                        gap: '32px',
+                        gap: isMobile ? '16px' : '32px',
                     }}
                 >
                     {benefits.map((benefit, idx) => (
@@ -937,7 +1003,7 @@ function Benefits({ isMobile }) {
                             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                             transition={{ delay: idx * 0.1, duration: 0.5 }}
                             style={{
-                                padding: '32px',
+                                padding: isMobile ? '20px' : '32px',
                                 backgroundColor: `${COLORS.navy}08`,
                                 borderRadius: '12px',
                                 border: `1px solid ${COLORS.gold}33`,
@@ -953,11 +1019,11 @@ function Benefits({ isMobile }) {
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
-                            <div style={{ fontSize: '56px', marginBottom: '16px', display: 'inline-block' }}>{benefit.icon}</div>
-                            <h3 style={{ fontSize: '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
+                            <div style={{ fontSize: isMobile ? '40px' : '56px', marginBottom: '16px', display: 'inline-block' }}>{benefit.icon}</div>
+                            <h3 style={{ fontSize: isMobile ? '14px' : '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.navy, marginBottom: '12px' }}>
                                 {benefit.title}
                             </h3>
-                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", fontSize: '14px' }}>{benefit.desc}</p>
+                            <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : '14px' }}>{benefit.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -978,7 +1044,7 @@ function FAQ({ isMobile }) {
     const faqs = [
         {
             q: '¿Cuánto tiempo tarda el proceso completo?',
-            a: 'Depende del tamaño y complejidad de tu empresa. Generalmente, desde el diagnóstico hasta la implementación toma entre 2-4 meses, con acompañamiento continuo después.',
+            a: 'Depende del tamaño y complejidad de tu empresa. Aunque se garantiza un acompañamiento continuo después.',
         },
         {
             q: '¿Qué pasa si mi equipo no quiere cambiar?',
@@ -994,13 +1060,13 @@ function FAQ({ isMobile }) {
         },
         {
             q: '¿Es adaptable a cualquier sector?',
-            a: 'Sí. Nuestro enfoque es flexible y personalizado. Trabajamos con retail, servicios, finanzas, salud y más.',
+            a: 'Sí. Nuestro enfoque es flexible y personalizado. Trabajamos con hoteles, tiendas, clinicas y cualquier sector que tenga contacto directo con el consumidor',
         },
     ];
 
     return (
-        <section ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.navy }}>
-            <div style={{ width: '100%', padding: '0 24px' }}>
+        <section ref={ref} style={{ padding: isMobile ? '60px 16px' : '80px 24px', backgroundColor: COLORS.navy }}>
+            <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -1010,7 +1076,7 @@ function FAQ({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
                             marginBottom: '16px',
                             color: COLORS.gold,
@@ -1020,7 +1086,7 @@ function FAQ({ isMobile }) {
                     </h2>
                 </motion.div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '12px' : '16px' }}>
                     {faqs.map((faq, idx) => (
                         <motion.div
                             key={idx}
@@ -1038,7 +1104,7 @@ function FAQ({ isMobile }) {
                                 onClick={() => setOpenFAQ(openFAQ === idx ? -1 : idx)}
                                 style={{
                                     width: '100%',
-                                    padding: '24px',
+                                    padding: isMobile ? '16px' : '24px',
                                     display: 'flex',
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
@@ -1051,7 +1117,7 @@ function FAQ({ isMobile }) {
                                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = `${COLORS.gold}26`)}
                                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                             >
-                                <h3 style={{ fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.white, fontSize: '18px' }}>
+                                <h3 style={{ fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.white, fontSize: isMobile ? '13px' : '18px' }}>
                                     {faq.q}
                                 </h3>
                                 <div
@@ -1060,7 +1126,8 @@ function FAQ({ isMobile }) {
                                         transition: 'transform 0.3s ease',
                                         transform: openFAQ === idx ? 'rotate(180deg)' : 'rotate(0deg)',
                                         flexShrink: 0,
-                                        marginLeft: '16px',
+                                        marginLeft: isMobile ? '12px' : '16px',
+                                        fontSize: isMobile ? '12px' : '16px',
                                     }}
                                 >
                                     ▼
@@ -1073,10 +1140,11 @@ function FAQ({ isMobile }) {
                                     animate={{ opacity: 1, height: 'auto' }}
                                     exit={{ opacity: 0, height: 0 }}
                                     style={{
-                                        padding: '0 24px 24px 24px',
+                                        padding: isMobile ? '12px 16px 16px' : '0 24px 24px 24px',
                                         color: '#ccc',
                                         fontFamily: "'Inria Serif', serif",
                                         borderTop: `1px solid ${COLORS.gold}33`,
+                                        fontSize: isMobile ? '12px' : '14px',
                                     }}
                                 >
                                     {faq.a}
@@ -1099,8 +1167,8 @@ function CTAFinal({ isMobile }) {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section id="contacto" ref={ref} style={{ padding: '80px 24px', backgroundColor: COLORS.white }}>
-            <div style={{ width: '100%', padding: '0 24px', textAlign: 'center' }}>
+        <section id="contacto" ref={ref} style={{ padding: isMobile ? '60px 16px' : '80px 24px', backgroundColor: COLORS.white }}>
+            <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -1109,9 +1177,9 @@ function CTAFinal({ isMobile }) {
                     <h2
                         style={{
                             fontFamily: "'Great Vibes', cursive",
-                            fontSize: isMobile ? '36px' : '56px',
+                            fontSize: isMobile ? '32px' : '56px',
                             fontWeight: '400',
-                            marginBottom: '24px',
+                            marginBottom: isMobile ? '16px' : '24px',
                             background: 'linear-gradient(90deg, #7a5a1a 0%, #c9a24d 20%, #f5e6a8 40%, #ffd86b 50%, #f5e6a8 60%, #c9a24d 80%, #7a5a1a 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
@@ -1121,7 +1189,7 @@ function CTAFinal({ isMobile }) {
                         El primer paso es en grande
                     </h2>
 
-                    <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", fontSize: '18px', marginBottom: '48px' }}>
+                    <p style={{ color: COLORS.textGray, fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '13px' : '18px', marginBottom: isMobile ? '32px' : '48px' }}>
                         Agendar una charla inicial donde exploramos tu situación y diseñamos un plan personalizado. Sin compromiso.
                     </p>
 
@@ -1129,20 +1197,21 @@ function CTAFinal({ isMobile }) {
                         initial={{ opacity: 0, y: 10 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                         transition={{ delay: 0.3 }}
-                        style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}
+                        style={{ display: 'flex', gap: isMobile ? '12px' : '16px', justifyContent: 'center', flexWrap: 'wrap' }}
                     >
                         <button
                             style={{
-                                padding: '16px 32px',
+                                padding: isMobile ? '12px 20px' : '16px 32px',
                                 backgroundColor: COLORS.gold,
                                 color: COLORS.navy,
                                 border: 'none',
                                 borderRadius: '8px',
                                 fontFamily: "'Inria Serif', serif",
                                 fontWeight: 'bold',
-                                fontSize: '16px',
+                                fontSize: isMobile ? '13px' : '16px',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
+                                whiteSpace: 'nowrap',
                             }}
                             onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
                             onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
@@ -1151,16 +1220,17 @@ function CTAFinal({ isMobile }) {
                         </button>
                         <button
                             style={{
-                                padding: '16px 32px',
+                                padding: isMobile ? '12px 20px' : '16px 32px',
                                 backgroundColor: 'transparent',
                                 color: COLORS.gold,
                                 border: `2px solid ${COLORS.gold}`,
                                 borderRadius: '8px',
                                 fontFamily: "'Inria Serif', serif",
                                 fontWeight: 'bold',
-                                fontSize: '16px',
+                                fontSize: isMobile ? '13px' : '16px',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
+                                whiteSpace: 'nowrap',
                             }}
                             onMouseEnter={(e) => (e.target.style.backgroundColor = `${COLORS.gold}10`)}
                             onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
@@ -1169,7 +1239,7 @@ function CTAFinal({ isMobile }) {
                         </button>
                     </motion.div>
 
-                    <p style={{ color: '#999', fontFamily: "'Inria Serif', serif", fontSize: '12px', marginTop: '32px' }}>
+                    <p style={{ color: '#999', fontFamily: "'Inria Serif', serif", fontSize: '12px', marginTop: isMobile ? '20px' : '32px' }}>
                         Respuesta en menos de 24 horas
                     </p>
                 </motion.div>
@@ -1184,10 +1254,12 @@ function CTAFinal({ isMobile }) {
 
 function Footer({ isMobile }) {
     return (
-        <footer style={{ backgroundColor: COLORS.navy, borderTop: `1px solid ${COLORS.gold}33`, padding: '48px 24px' }}>
+        <footer style={{ backgroundColor: COLORS.navy, borderTop: `1px solid ${COLORS.gold}33`, padding: isMobile ? '40px 16px' : '48px 24px' }}>
             <div
                 style={{
                     width: '100%',
+                    maxWidth: '1200px',
+                    margin: '0 auto',
                     marginBottom: '32px',
                 }}
             >
@@ -1195,7 +1267,7 @@ function Footer({ isMobile }) {
                     style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)',
-                        gap: '32px',
+                        gap: isMobile ? '24px' : '32px',
                         marginBottom: '32px',
                     }}
                 >
@@ -1223,57 +1295,12 @@ function Footer({ isMobile }) {
                             </span>
                         </div>
                         <p style={{ color: '#999', fontFamily: "'Inria Serif', serif", fontSize: '14px' }}>
-                            Elevando la atención al cliente con profesionalismo y ética.
+                            Atención de fideliza, calidad que sella.
                         </p>
                     </div>
 
                     {/* Links */}
-                    <div>
-                        <h4 style={{ color: COLORS.gold, fontFamily: "'Inria Serif', serif", fontWeight: 'bold', marginBottom: '16px' }}>
-                            Navegación
-                        </h4>
-                        <ul style={{ listStyle: 'none' }}>
-                            <li>
-                                <a
-                                    href="#problema"
-                                    style={{
-                                        color: '#999',
-                                        fontFamily: "'Inria Serif', serif",
-                                        fontSize: '14px',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    Problema
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#servicios"
-                                    style={{
-                                        color: '#999',
-                                        fontFamily: "'Inria Serif', serif",
-                                        fontSize: '14px',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    Servicios
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#proceso"
-                                    style={{
-                                        color: '#999',
-                                        fontFamily: "'Inria Serif', serif",
-                                        fontSize: '14px',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    Proceso
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <div> <h4 style={{ color: COLORS.gold, fontFamily: "'Inria Serif', serif", fontWeight: 'bold', marginBottom: '16px' }}> Redes </h4> <ul style={{ listStyle: 'none' }}> <li> <a href="https://www.instagram.com/selloperfecto.ve?igsh=b3hycGpoaW8xeTJ0" target="_blank" rel="noopener noreferrer" style={{ color: '#999', fontFamily: "'Inria Serif', serif", fontSize: '14px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', transition: 'color 0.3s ease', }} onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.gold)} onMouseLeave={(e) => (e.currentTarget.style.color = '#999')} > <FaInstagram size={18} /> Instagram </a> </li> </ul> </div>
 
                     {/* Servicios */}
                     <div>
@@ -1305,7 +1332,7 @@ function Footer({ isMobile }) {
                             info@selloperfecto.com
                         </p>
                         <p style={{ color: '#999', fontFamily: "'Inria Serif', serif", fontSize: '14px' }}>
-                            +57 (1) XXXX-XXXX
+                            +58 412-5442517
                         </p>
                     </div>
                 </div>

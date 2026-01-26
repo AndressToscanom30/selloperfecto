@@ -41,7 +41,7 @@ export function TeamsSection() {
             id: 1,
             name: 'Samuel Martínez',
             role: 'Co-Fundador & Director de Estrategia y operaciones',
-            description: 'Líder apasionado por transformar la atención al cliente. Con más de 15 años de experiencia en desarrollo organizacional, diseña estrategias personalizadas que elevan los estándares de profesionalismo en cada empresa.',
+            description: 'Profesional con sólida experiencia en liderazgo colaborativo y gestión estratégica. Destaca por su capacidad para estructurar procesos, coordinar operaciones y orientar la toma de decisiones hacia resultados sostenibles, promoviendo una cultura de eficiencia y alineación organizacional.',
             image: SamuelM,
             social: {
                 linkedin: '#',
@@ -52,7 +52,7 @@ export function TeamsSection() {
             id: 2,
             name: 'Alexandra Duque',
             role: 'Co-Fundadora & Directora de Imgen',
-            description: 'Organizadora nata, convierte el caos en orden. Con más de una década liderando proyectos exitosos, su enfoque metódico y su pasión por la excelencia aseguran resultados sobresalientes.',
+            description : 'Especialista en dirección visual con un enfoque claro y metódico. Su criterio estético y atención al detalle garantizan una identidad visual consistente, transformando conceptos en soluciones coherentes que fortalecen la presencia institucional del equipo',
             image: AlexandraD,
             social: {
                 linkedin: '#',
@@ -63,7 +63,7 @@ export function TeamsSection() {
             id: 3,
             name: 'Antonella Raimundo',
             role: 'Co-Fundadora & Directora de Medios',
-            description: 'Creativa y detallista, construye sitios web que son verdaderas obras de arte. Su dominio técnico y su sentido estético garantizan plataformas digitales impactantes y funcionales.',
+            description: 'Profesional creativa con una visión estratégica en comunicación y medios. Aporta enfoques innovadores y estructurados, impulsando mensajes efectivos y alineados con los objetivos corporativos, fortaleciendo el posicionamiento del equipo',
             image: AntonellaR,
             social: {
                 linkedin: '#',
@@ -74,7 +74,7 @@ export function TeamsSection() {
             id: 4,
             name: 'Carlos Colmenares',
             role: 'Co-Fundador & Director de Servicios',
-            description: 'Apasionado por el mundo digital, crea estrategias de marketing que conectan y convierten. Su enfoque analítico y creativo asegura campañas efectivas y medibles.',
+            description: 'Perfil orientado a la gestión de servicios y desarrollo creativo. Se distingue por su capacidad para convertir ideas en soluciones concretas, facilitando procesos y asegurando una entrega consistente, alineada con los estándares de calidad del equipo.',
             image: CarlosC,
             social: {
                 linkedin: '#',
@@ -85,7 +85,7 @@ export function TeamsSection() {
             id: 5,
             name: 'Manuel Gutierrez',
             role: 'Co-Fundador & Director de Estrategia',
-            description: 'Con un enfoque en resultados, ayuda a las empresas a alcanzar su máximo potencial. Su experiencia en diversas industrias le permite ofrecer soluciones prácticas y efectivas.',
+            description: 'Responsable de la planificación estratégica y definición de lineamientos clave. Aporta una visión analítica y estructurada, enfocada en elevar los estándares profesionales y garantizar propuestas sólidas, coherentes y orientadas al crecimiento.',
             image: ManuelG,
             social: {
                 linkedin: '#',
@@ -96,7 +96,7 @@ export function TeamsSection() {
             id: 6,
             name: 'María Moncada',
             role: 'Co-Fundadora & Directora de Estrategia',
-            description: 'Los números son su pasión. Convierte datos complejos en insights accionables que impulsan el crecimiento y la eficiencia en los negocios.',
+            description: 'Profesional enfocada en la alineación entre visión, propósito y ejecución. Lidera procesos estratégicos con un enfoque integral, asegurando coherencia organizacional y generación de valor a través de decisiones bien fundamentadas.',
             image: MariaF,
             social: {
                 linkedin: '#',
@@ -107,7 +107,7 @@ export function TeamsSection() {
             id: 7,
             name: 'Yhoseph Bonilla',
             role: 'Co-Fundador & Director de Finanzas',
-            description: 'Con un enfoque humano y auténtico, gestiona comunidades digitales que aman y defienden las marcas. Su habilidad para contar historias y su empatía son clave en su estrategia.',
+            description: 'Encargado de la gestión financiera y análisis económico. Su enfoque meticuloso permite optimizar recursos, fortalecer la sostenibilidad financiera y respaldar la toma de decisiones mediante proyecciones claras y estructuradas.',
             image: YhosepB,
             social: {
                 linkedin: '#',
