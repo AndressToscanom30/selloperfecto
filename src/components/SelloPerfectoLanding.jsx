@@ -1199,7 +1199,7 @@ function CTAFinal({ isMobile }) {
                         transition={{ delay: 0.3 }}
                         style={{ display: 'flex', gap: isMobile ? '12px' : '16px', justifyContent: 'center', flexWrap: 'wrap' }}
                     >
-                        <button
+                        <a href='https://wa.me/584125442517?text=Estoy%20listo%20para%20llevar%20mi%20compa%C3%B1%C3%ADa%20al%20siguiente%20nivel'
                             style={{
                                 padding: isMobile ? '12px 20px' : '16px 32px',
                                 backgroundColor: COLORS.gold,
@@ -1217,7 +1217,7 @@ function CTAFinal({ isMobile }) {
                             onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
                         >
                             Agendar asesoría
-                        </button>
+                        </a>
                         <button
                             style={{
                                 padding: isMobile ? '12px 20px' : '16px 32px',
