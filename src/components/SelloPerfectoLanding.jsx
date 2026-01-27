@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { FaInstagram } from "react-icons/fa";
-import { useRef } from 'react';
 import LogoSP from '../assets/LogoSP.png';
-import { VideoSplash } from './VideoSplash';
+import { VideoSection } from './VideoSection.jsx'
 import TeamsSection from './TeamSection';
 import { PartnersSection } from './PartnersSection';
 import VideoIntro from '../assets/Intro.mp4';
@@ -32,7 +31,6 @@ export default function SelloPerfectoLanding() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isTablet, setIsTablet] = useState(false);
-    const [videoFinished, setVideoFinished] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -46,32 +44,21 @@ export default function SelloPerfectoLanding() {
     }, []);
 
     return (
-        <>
-            {/* VIDEO SPLASH SCREEN */}
-            {!videoFinished && (
-                <VideoSplash
-                    videoUrl={VideoIntro}
-                    duration={47}
-                    onFinish={() => setVideoFinished(true)}
-                />
-            )}
-
-            {/* CONTENIDO PRINCIPAL */}
-            <div style={{ background: 'white' }}>
-                <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isMobile={isMobile} />
-                <Hero isMobile={isMobile} isTablet={isTablet} />
-                <ValueProposition isMobile={isMobile} />
-                <Problem isMobile={isMobile} />
-                <Services isMobile={isMobile} />
-                <HowItWorks isMobile={isMobile} isTablet={isTablet} />
-                <Benefits isMobile={isMobile} />
-                <TeamsSection />
-                <PartnersSection isMobile={isMobile} />
-                <FAQ isMobile={isMobile} />
-                <CTAFinal isMobile={isMobile} />
-                <Footer isMobile={isMobile} />
-            </div>
-        </>
+        <div style={{ background: 'white' }}>
+            <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isMobile={isMobile} />
+            <Hero isMobile={isMobile} isTablet={isTablet} />
+            <VideoSection isMobile={isMobile} />
+            <ValueProposition isMobile={isMobile} />
+            <Problem isMobile={isMobile} />
+            <Services isMobile={isMobile} />
+            <HowItWorks isMobile={isMobile} isTablet={isTablet} />
+            <Benefits isMobile={isMobile} />
+            <TeamsSection />
+            <PartnersSection isMobile={isMobile} />
+            <FAQ isMobile={isMobile} />
+            <CTAFinal isMobile={isMobile} />
+            <Footer isMobile={isMobile} />
+        </div>
     );
 }
 
@@ -828,13 +815,14 @@ function HowItWorks({ isMobile, isTablet }) {
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: isMobile
-                            ? '1fr'
-                            : isTablet
-                                ? 'repeat(2, 1fr)'
-                                : 'repeat(5, 1fr)',
-                        gap: '16px',
+                        gridTemplateColumns: isMobile 
+                            ? '1fr' 
+                            : isTablet 
+                            ? 'repeat(3, 1fr)' 
+                            : 'repeat(5, 1fr)',
+                        gap: isMobile ? '24px' : '20px',
                         position: 'relative',
+                        padding: '0 10px',
                     }}
                 >
                     {/* Línea conectora - Solo en desktop */}
@@ -865,11 +853,11 @@ function HowItWorks({ isMobile, isTablet }) {
                             }}
                         >
                             {/* Círculo número */}
-                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: isMobile ? '24px' : isTablet ? '20px' : '32px' }}>
                                 <div
                                     style={{
-                                        width: isMobile ? '48px' : '64px',
-                                        height: isMobile ? '48px' : '64px',
+                                        width: isMobile ? '48px' : isTablet ? '56px' : '64px',
+                                        height: isMobile ? '48px' : isTablet ? '56px' : '64px',
                                         backgroundColor: COLORS.gold,
                                         borderRadius: '50%',
                                         display: 'flex',
@@ -877,7 +865,7 @@ function HowItWorks({ isMobile, isTablet }) {
                                         justifyContent: 'center',
                                         color: COLORS.navy,
                                         fontWeight: 'bold',
-                                        fontSize: isMobile ? '18px' : '24px',
+                                        fontSize: isMobile ? '18px' : isTablet ? '20px' : '24px',
                                         fontFamily: "'Great Vibes', cursive",
                                         boxShadow: `0 10px 30px ${COLORS.gold}4d`,
                                     }}
@@ -891,15 +879,16 @@ function HowItWorks({ isMobile, isTablet }) {
                                 style={{
                                     backgroundColor: `${COLORS.gold}19`,
                                     borderRadius: '6px',
-                                    padding: isMobile ? '16px' : '24px',
+                                    padding: isMobile ? '16px' : isTablet ? '20px' : '24px',
                                     border: `1px solid ${COLORS.gold}4d`,
                                     height: '100%',
+                                    minHeight: isMobile ? 'auto' : isTablet ? '280px' : '300px',
                                 }}
                             >
-                                <h3 style={{ fontSize: isMobile ? '14px' : '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.gold, marginBottom: '12px', textAlign: 'center' }}>
+                                <h3 style={{ fontSize: isMobile ? '14px' : isTablet ? '16px' : '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.gold, marginBottom: '12px', textAlign: 'center' }}>
                                     {phase.title}
                                 </h3>
-                                <p style={{ color: '#ccc', fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : '14px', marginBottom: '16px', textAlign: 'center' }}>
+                                <p style={{ color: '#ccc', fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : isTablet ? '13px' : '14px', marginBottom: '16px', textAlign: 'center' }}>
                                     {phase.desc}
                                 </p>
                                 <ul style={{ listStyle: 'none' }}>
@@ -911,7 +900,7 @@ function HowItWorks({ isMobile, isTablet }) {
                                                 gap: '8px',
                                                 alignItems: 'center',
                                                 color: '#ccc',
-                                                fontSize: isMobile ? '11px' : '12px',
+                                                fontSize: isMobile ? '11px' : isTablet ? '11.5px' : '12px',
                                                 fontFamily: "'Inria Serif', serif",
                                                 marginBottom: '8px',
                                             }}
