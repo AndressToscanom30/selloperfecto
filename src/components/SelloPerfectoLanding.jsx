@@ -774,14 +774,16 @@ function HowItWorks({ isMobile, isTablet }) {
     ];
 
     return (
-        <section id="proceso" ref={ref} style={{ padding: isMobile ? '60px 16px' : '120px 24px', backgroundColor: COLORS.navy }}>
-            <div
-                style={{
-                    width: '100%',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                }}
-            >
+        <section 
+            id="proceso" 
+            ref={ref} 
+            style={{ 
+                padding: isMobile ? '60px 16px' : '80px 24px', 
+                backgroundColor: COLORS.navy,
+                overflow: 'hidden',
+            }}
+        >
+            <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -805,7 +807,7 @@ function HowItWorks({ isMobile, isTablet }) {
                             color: '#bbb',
                             textAlign: 'center',
                             fontFamily: "'Inria Serif', serif",
-                            marginBottom: '40px',
+                            marginBottom: '50px',
                         }}
                     >
                         Un proceso claro, transparente y diseñado para resultados reales
@@ -820,9 +822,8 @@ function HowItWorks({ isMobile, isTablet }) {
                             : isTablet 
                             ? 'repeat(3, 1fr)' 
                             : 'repeat(5, 1fr)',
-                        gap: isMobile ? '24px' : '20px',
+                        gap: isMobile ? '40px 20px' : '40px 16px',
                         position: 'relative',
-                        padding: '0 10px',
                     }}
                 >
                     {/* Línea conectora - Solo en desktop */}
@@ -830,12 +831,11 @@ function HowItWorks({ isMobile, isTablet }) {
                         <div
                             style={{
                                 position: 'absolute',
-                                top: '96px',
-                                left: 0,
-                                right: 0,
-                                height: '4px',
-                                borderRadius: '10px',
-                                background: `${COLORS.gold}`,
+                                top: '32px',
+                                left: '5%',
+                                right: '5%',
+                                height: '3px',
+                                background: COLORS.gold,
                                 zIndex: 0,
                             }}
                         />
@@ -846,67 +846,114 @@ function HowItWorks({ isMobile, isTablet }) {
                             key={idx}
                             initial={{ opacity: 0, y: 30 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                            transition={{ delay: idx * 0.15, duration: 0.6 }}
+                            transition={{ delay: idx * 0.1, duration: 0.6 }}
                             style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
                                 position: 'relative',
                                 zIndex: 1,
                             }}
                         >
-                            {/* Círculo número */}
-                            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: isMobile ? '24px' : isTablet ? '20px' : '32px' }}>
-                                <div
-                                    style={{
-                                        width: isMobile ? '48px' : isTablet ? '56px' : '64px',
-                                        height: isMobile ? '48px' : isTablet ? '56px' : '64px',
-                                        backgroundColor: COLORS.gold,
-                                        borderRadius: '50%',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        color: COLORS.navy,
-                                        fontWeight: 'bold',
-                                        fontSize: isMobile ? '18px' : isTablet ? '20px' : '24px',
-                                        fontFamily: "'Great Vibes', cursive",
-                                        boxShadow: `0 10px 30px ${COLORS.gold}4d`,
-                                    }}
-                                >
-                                    {phase.phase}
-                                </div>
-                            </div>
-
-                            {/* Contenido */}
+                            {/* Círculo número - SIN MARGIN BOTTOM, dentro del flex */}
                             <div
                                 style={{
-                                    backgroundColor: `${COLORS.gold}19`,
-                                    borderRadius: '6px',
-                                    padding: isMobile ? '16px' : isTablet ? '20px' : '24px',
-                                    border: `1px solid ${COLORS.gold}4d`,
-                                    height: '100%',
-                                    minHeight: isMobile ? 'auto' : isTablet ? '280px' : '300px',
+                                    width: isMobile ? '50px' : isTablet ? '56px' : '64px',
+                                    height: isMobile ? '50px' : isTablet ? '56px' : '64px',
+                                    backgroundColor: COLORS.gold,
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    color: COLORS.navy,
+                                    fontWeight: 'bold',
+                                    fontSize: isMobile ? '20px' : isTablet ? '22px' : '26px',
+                                    fontFamily: "'Great Vibes', cursive",
+                                    boxShadow: `0 8px 24px ${COLORS.gold}4d`,
+                                    marginBottom: isMobile ? '16px' : '20px',
+                                    flexShrink: 0,
                                 }}
                             >
-                                <h3 style={{ fontSize: isMobile ? '14px' : isTablet ? '16px' : '18px', fontFamily: "'Inria Serif', serif", fontWeight: 'bold', color: COLORS.gold, marginBottom: '12px', textAlign: 'center' }}>
+                                {phase.phase}
+                            </div>
+
+                            {/* Card contenedor */}
+                            <div
+                                style={{
+                                    backgroundColor: `${COLORS.gold}15`,
+                                    borderRadius: '8px',
+                                    padding: isMobile ? '18px 16px' : isTablet ? '20px 18px' : '24px 20px',
+                                    border: `1px solid ${COLORS.gold}4d`,
+                                    width: '100%',
+                                    minHeight: isMobile ? 'auto' : isTablet ? '260px' : '280px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-start',
+                                }}
+                            >
+                                <h3 
+                                    style={{ 
+                                        fontSize: isMobile ? '15px' : isTablet ? '16px' : '18px', 
+                                        fontFamily: "'Inria Serif', serif", 
+                                        fontWeight: 'bold', 
+                                        color: COLORS.gold, 
+                                        marginBottom: '10px', 
+                                        textAlign: 'center',
+                                        margin: 0,
+                                        padding: '0 0 10px 0',
+                                    }}
+                                >
                                     {phase.title}
                                 </h3>
-                                <p style={{ color: '#ccc', fontFamily: "'Inria Serif', serif", fontSize: isMobile ? '12px' : isTablet ? '13px' : '14px', marginBottom: '16px', textAlign: 'center' }}>
+
+                                <p 
+                                    style={{ 
+                                        color: '#ccc', 
+                                        fontFamily: "'Inria Serif', serif", 
+                                        fontSize: isMobile ? '12px' : isTablet ? '12.5px' : '13px', 
+                                        marginBottom: '14px', 
+                                        textAlign: 'center',
+                                        lineHeight: '1.5',
+                                        margin: '0 0 14px 0',
+                                        padding: 0,
+                                    }}
+                                >
                                     {phase.desc}
                                 </p>
-                                <ul style={{ listStyle: 'none' }}>
+
+                                <ul 
+                                    style={{ 
+                                        listStyle: 'none',
+                                        margin: 0,
+                                        padding: 0,
+                                    }}
+                                >
                                     {phase.items.map((item, i) => (
                                         <li
                                             key={i}
                                             style={{
                                                 display: 'flex',
                                                 gap: '8px',
-                                                alignItems: 'center',
-                                                color: '#ccc',
+                                                alignItems: 'flex-start',
+                                                color: '#aaa',
                                                 fontSize: isMobile ? '11px' : isTablet ? '11.5px' : '12px',
                                                 fontFamily: "'Inria Serif', serif",
-                                                marginBottom: '8px',
+                                                marginBottom: i < phase.items.length - 1 ? '8px' : 0,
+                                                margin: 0,
+                                                padding: 0,
                                             }}
                                         >
-                                            <div style={{ width: '6px', height: '6px', backgroundColor: COLORS.gold, borderRadius: '50%', flexShrink: 0 }} />
-                                            {item}
+                                            <div 
+                                                style={{ 
+                                                    width: '5px', 
+                                                    height: '5px', 
+                                                    backgroundColor: COLORS.gold, 
+                                                    borderRadius: '50%', 
+                                                    flexShrink: 0,
+                                                    marginTop: '5px',
+                                                }} 
+                                            />
+                                            <span>{item}</span>
                                         </li>
                                     ))}
                                 </ul>
